@@ -1,0 +1,24 @@
+Basically rest api is consumed and returned in JSON
+if we need to get XML then use a jar jackson-dataformat-xml in POM. (Accept application/xml as header)
+ 
+HATEOAS is useful for sending links in JSON.
+
+Dynamic filtering is for some requests you want to send some fields and for other requests you dont.
+Mapping Jackson Value can do this.
+
+Verisoning an API
+URI Versioning:  /v1/person , /v2/person
+Params: @GetMapping(value = "/person/header", params= "version=1") and pass params
+Headers: @GetMapping(value = "/person/header", headers= "X-API-VERSION=1") and pass that header
+Content Negotiation: @GetMapping(value = "/person/header", produces= "application/api-v1+json") and pass that header as Accept: application/api-v1+json
+
+Handle Exceptions globally https://www.baeldung.com/exception-handling-for-rest-with-spring
+
+Front controller Pattern -> All requests go to the dispatcher Servlet & dispatcher servlet looks at controllers and mappings
+and finds the right controller method to execute based on Http Request.
+
+Advantages of spring boot
+1. Standalone ready for production (has embedded tomcat).
+2. Spring boot autoconfiguration helps a lot (configuring datasource, or converting objects to JSON etc.)
+3. Spring boot is opinionated (it says its a good starting point like for database it will do in memory, datasource and hibernate
+entity manager but we can always ovveride it).
