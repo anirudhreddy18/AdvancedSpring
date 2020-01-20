@@ -22,3 +22,39 @@ Advantages of spring boot
 2. Spring boot autoconfiguration helps a lot (configuring datasource, or converting objects to JSON etc.)
 3. Spring boot is opinionated (it says its a good starting point like for database it will do in memory, datasource and hibernate
 entity manager but we can always ovveride it).
+
+SOAP -> send xml requests get xml repsonse back
+transport: http, MQ
+WSDL. (endpoint, all operations, request, response).
+
+REST -> make best use of HTTP. Any request fromat (JSON, XML, HTML)
+Browser sends request to server & get response. (URI is a resource).
+Swagger only HTTP.
+
+MICROSERVICES
+REST
+Small Deployable Units
+Cloud Enabled (can be scaled dynamically up & down)
+Faster release cycles
+Microservices can be written in diifferent languages & they can talk to each other.
+
+Naming Server Eureka
+Ribbon(Client Side load balancing)
+Feign (Easier Rest Client)
+
+Monitoring
+Zipkin API Gateway
+Netflix Zuul
+
+@ConfigurationProperties can be used for mapping values to POJO from application.yml also useful so we have all our configuration at one place & also use @refreshscope.
+
+environment.getProperty("local.server.port") -> gets the port of app running.
+
+Feign Client: use @EnableFeignClient
+@FeignClient(name="", url = "https://localhost:8080")
+
+and then methods will be 
+@GetMapping("/currency-exchange/from/{from}/to/{to}"
+public CurrencyConversionBean retrieveExchangeValue(@PathVariable String from, @PathVariable String to); 
+
+
