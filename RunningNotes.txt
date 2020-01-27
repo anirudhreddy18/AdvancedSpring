@@ -50,11 +50,43 @@ Netflix Zuul
 
 environment.getProperty("local.server.port") -> gets the port of app running.
 
-Feign Client: use @EnableFeignClient
-@FeignClient(name="", url = "https://localhost:8080")
+Feign Client: 
+add dependency to pom.xml
+@EnableFeignClients("package-name")
+@FeignClient(name="pao-service", url = "https://localhost:8080")
 
 and then methods will be 
 @GetMapping("/currency-exchange/from/{from}/to/{to}"
 public CurrencyConversionBean retrieveExchangeValue(@PathVariable String from, @PathVariable String to); 
+
+Ribbon -> client side load balancing
+Distribute load across multiple instances for example PAO Service has 4 instances, make sure each instance is getting proper
+load from TAg Service.
+Add dependency to POM.
+@FeignClient(name="pao-service")
+@RibbonClient(name="pao-service")
+pao-service.ribbon.listOfServers=http://localhost:8000,http://localhost:8001
+
+EUREKA -> Naming Server
+Automatically scale instances up & down based on load
+ServiceRegistration -> each app should register with eureka server
+ServiceDiscovery -> find the instances of other microservices to call.
+
+Naming Server Code
+Start a new Project with dependecy eureka-netflix-server
+add application name,port(8761 default), and config properties 
+@EnableEurekaServer
+
+TAG Service register with Eureka
+Add dependency eureka-client
+@EnableDiscoveryClient
+eureka.client.service-url.default-zone=http://localhost:8761/eureka (Register with Eureka Naming Server).
+//pao-service.ribbon.listOfServers=http://localhost:8000,http://localhost:8001 (comment this line so ribbon will start talking to eureka server).
+
+PAO Service register with Eureka
+Add dependency eureka-client
+@EnableDiscoveryClient
+eureka.client.service-url.default-zone=http://localhost:8761/eureka (Register with Eureka Naming Server).
+
 
 
