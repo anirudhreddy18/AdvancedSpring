@@ -43,8 +43,7 @@ Ribbon(Client Side load balancing)
 Feign (Easier Rest Client)
 
 Monitoring
-Zipkin API Gateway
-Netflix Zuul
+ZUUL API Gateway
 
 @ConfigurationProperties can be used for mapping values to POJO from application.yml also useful so we have all our configuration at one place & also use @refreshscope.
 
@@ -88,5 +87,14 @@ Add dependency eureka-client
 @EnableDiscoveryClient
 eureka.client.service-url.default-zone=http://localhost:8761/eureka (Register with Eureka Naming Server).
 
+------------------------------------------------
+MONITORING
 
+Netflix ZUUL API GATEWAY SERVER
+Code (Add Zuul depdencncy to POM)
+@EnableDiscoveryClient
+@EnableZuulProxy
 
+Distributed Tracing
+A centralized place to look at the complete request chain.
+Spring cloud Sleuth and Zipkin
