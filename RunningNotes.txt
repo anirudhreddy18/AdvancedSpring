@@ -97,4 +97,15 @@ Code (Add Zuul depdencncy to POM)
 
 Distributed Tracing
 A centralized place to look at the complete request chain.
-Spring cloud Sleuth and Zipkin
+Spring cloud Sleuth and Zipkin (Tracing Server)
+
+Add Spring cloud slueth to every API Project.
+It will assign a unique id across all microservices, so when you look at console logs of each application you can see
+same id.
+Looking at logs of each app is difficult so we need to be able to see them at 1 place, thats where zipkin comes in
+Push all the logs to RabbitMQ for each microservice and let zipkin listen to RabbitMQ.
+
+Download zipkin Server jar and run it with java and connect it to RabbitMQ
+Add slueth-zipkin dependency so that logging  messages would be sent in to format liked by Zipkin.
+Add bus-amqp dependency to send messages to RabbitMQ.
+Then you can view all the messages on Zipin UI (localhost:9411/zipkin/)
