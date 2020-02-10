@@ -109,3 +109,17 @@ Download zipkin Server jar and run it with java and connect it to RabbitMQ
 Add slueth-zipkin dependency so that logging  messages would be sent in to format liked by Zipkin.
 Add bus-amqp dependency to send messages to RabbitMQ.
 Then you can view all the messages on Zipin UI (localhost:9411/zipkin/)
+
+Spring Cloud Bus
+when an application needs to get latest props from config server we can use actuator refresh endpoint to reflect new values.
+But if microservice has more than 1 instance we have to manually update every instance
+Spring cloud Bus solves this problem
+connect config server and client microservices to bus-amqp dependency
+then hitting localhost:8080/bus/refresh should refresh all instances.
+
+Hystrix
+when a microservixe is dependent on another microservice and this goes down provide a default behaviour so other microservices
+can do its job.
+Problem solved by Hystrix framework.
+Add dependency to pom.xml
+and HystrixCommand and fall back Method.
